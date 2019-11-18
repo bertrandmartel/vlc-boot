@@ -4,6 +4,12 @@ Start a init.d VLC script at boot on your Raspberry PI for example in this case 
 
 In this example, VLC is executed as the pi user since the root user is denied using VLC, see vlc_start.sh
 
+## Usecase
+
+Use a raspberry PI connected to a screen to loop some videos with VLC :
+
+![tree](https://user-images.githubusercontent.com/5183022/69096771-5b640180-0a55-11ea-9dd7-6f21bf70c6cc.jpg)
+
 ## Install
 
 ```
