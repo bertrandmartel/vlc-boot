@@ -1,4 +1,20 @@
 #!/bin/bash
+#title        : vlc_boot
+#description  : start/stop/restart vlc_boot
+#########################################
+### install   : cp vlc_boot /etc/init.d/
+#               update-rc.d vlc_boot defaults
+### uninstall : update-rc.d -f vlc_boot remove
+### BEGIN INIT INFO
+# Provides: vlc_boot
+# Required-Start:
+# Required-Stop:
+# Default-Start: 2 3 4 5
+# Default-Stop: 0 1 6
+# Short-Description: vlc_boot
+# Description: Start VLC script at boot 
+### END INIT INFO
+
 VLC_START_SCRIPT=/bin/vlc_boot.sh
 PID_FILE=/tmp/vlc_boot.pid
 
@@ -6,7 +22,7 @@ case "$1" in
     start)
         echo "Starting vlc_boot service..."
 
-        COMMAND_TO_RUN=`start-stop-daemon -S -b -m -p $PID_FILE -x $FC_SCRIPT& :`
+        COMMAND_TO_RUN=`start-stop-daemon -S -b -m -p $PID_FILE -x $VLC_START_SCRIPT& :`
         setsid sh -c $COMMAND_TO_RUN> /dev/null 2>&1 < /dev/null
 
         echo -e "\E[31;33m[ OK ]\E[0m"
