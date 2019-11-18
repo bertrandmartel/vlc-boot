@@ -1,0 +1,30 @@
+#!/bin/bash
+VLC_START_SCRIPT=/bin/vlc_boot.sh
+PID_FILE=/tmp/vlc_boot.pid
+
+case "$1" in
+    start)
+        echo "Starting vlc_boot service..."
+
+        COMMAND_TO_RUN=`start-stop-daemon -S -b -m -p $PID_FILE -x $FC_SCRIPT& :`
+        setsid sh -c $COMMAND_TO_RUN> /dev/null 2>&1 < /dev/null
+
+        echo -e "\E[31;33m[ OK ]\E[0m"
+        ;;
+    stop)
+        echo "Stopping vlc_boot service..."
+
+        start-stop-daemon -K -q -p $PID_FILE
+
+        echo -e "\E[31;33m[ OK ]\E[0m"
+        ;;
+    restart|reload)
+        "$0" stop
+        "$0" start
+        ;;
+    *)
+        echo $"Usage: $0 {start|stop|restart}"
+        exit 1
+esac
+
+exit $?
