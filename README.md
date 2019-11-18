@@ -8,7 +8,8 @@ In this example, VLC is executed as the pi user since the root user is denied us
 
 ```
 git clone git@github.com:bertrandmartel/vlc-boot.git && cd vlc-boot
-cp vlc_start.sh /bin/
+cp vlc_boot.sh /bin/
+cp start_vlc.sh /bin/
 cp vlc_boot /etc/init.d/
 update-rc.d vlc_boot defaults
 systemctl enable vlc_boot
@@ -36,3 +37,7 @@ service vlc_boot restart
 ```
 update-rc.d -f vlc_boot remove
 ```
+
+## USB Volume path
+
+Note that the USB path is retrieved using `lsblk -o LABEL,MOUNTPOINT` so it won't work if you are using usbmount utility for example
